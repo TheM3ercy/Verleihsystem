@@ -5,8 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Verleisystem"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Vereleihsystem" Height="729" Width="940">
+    
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="80"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Menu >
+            <MenuItem Header="File"/>
+            <MenuItem Header="Home"/>
+            <MenuItem Header="Ansicht"/>
+        </Menu>
+        <StackPanel Grid.Row="1" Background="LightGray"/>
 
-    </Grid>
+
+
+        <StackPanel Margin="10" Grid.Row="2">
+            <TextBox Margin="0,30"></TextBox>
+            <DataGrid MinHeight="400"></DataGrid>
+        </StackPanel>
+        </Grid>
+        
+    
 </Window>
