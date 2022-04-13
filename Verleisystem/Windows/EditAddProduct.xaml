@@ -1,19 +1,22 @@
-﻿<Window x:Class="Verleihsystem.Windows.EditAddCategory"
+﻿<Window x:Class="Verleihsystem.Windows.EditAddProduct"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Verleihsystem.Windows"
         mc:Ignorable="d"
-        Title="EditAddCategory" Height="350" Width="400">
+        Title="EditAddProduct"  Height="350" Width="400">
     <Grid>
+
         <Label Content="Name" Margin="34,45,308,260"/>
         <Label Content="Nr: XXXXXXX" Margin="242,45,55,255"/>
         <TextBox HorizontalAlignment="Left" Margin="34,79,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="311" Background="#FFA49E9E"/>
-        <Label Content="Beschreibung" Margin="34,121,262,184"/>
-        <TextBox HorizontalAlignment="Left" Margin="34,155,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="311" Background="#FFA49E9E" Height="97"/>
+        <Label Content="Code" Margin="34,121,308,184"/>
+        <TextBox HorizontalAlignment="Left" Margin="34,155,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="311" Background="#FFA49E9E"/>
+        <Label Content="Kategorie" Margin="34,203,308,102"/>
+        <ComboBox HorizontalAlignment="Left" Margin="34,237,0,0" Text="" VerticalAlignment="Top" Width="311" Background="#FFA49E9E"/>
         <Button Content="Abbrechen" HorizontalAlignment="Left" Margin="34,288,0,0" VerticalAlignment="Top"/>
         <Button Content="Übernehmen" HorizontalAlignment="Left" Margin="272,288,0,0" VerticalAlignment="Top"/>
-
+        
     </Grid>
 </Window>
