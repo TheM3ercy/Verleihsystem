@@ -23,7 +23,11 @@
 
 
         <StackPanel Margin="10" Grid.Row="2">
-            <TextBox Margin="0,30"></TextBox>
+             <StackPanel Orientation="Horizontal">
+                 <TextBox Margin="0,30" Width="766"/>
+                 <ComboBox Width="149" Height="20"/>
+             </StackPanel>
+            
             <DataGrid MinHeight="400"></DataGrid>
         </StackPanel>
         </Grid>
