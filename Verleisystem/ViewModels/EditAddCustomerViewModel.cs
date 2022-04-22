@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Verleihsystem.Services;
 
 namespace Verleihsystem.ViewModels
 {
@@ -49,9 +50,6 @@ namespace Verleihsystem.ViewModels
             {
                 /*Create new Database entry*/
             }
-        },
-        _ => Name != null && Name != ""
-            && Telephone != null && Telephone != ""
-            && Email != null && Email != "" && Email.Contains("@"));
+        });
     }
 }
