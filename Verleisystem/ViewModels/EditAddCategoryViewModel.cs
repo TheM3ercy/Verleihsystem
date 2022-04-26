@@ -9,32 +9,27 @@ using Verleihsystem.Services;
 
 namespace Verleihsystem.ViewModels
 {
-    public class EditAddCustomerViewModel : ObservableObject
+    public class EditAddCategoryViewModel : ObservableObject
     {
-        private string name;
-        public string Name
+        private string categoryName;
+        public string CategoryName
         {
-            get { return name; }
-            set { name = value;
-                NotifyPropertyChanged(nameof(Name));
+            get { return categoryName; }
+            set
+            {
+                categoryName = value;
+                NotifyPropertyChanged(nameof(CategoryName));
             }
         }
 
-        private string telephone;
-        public string Telephone
+        private string description;
+        public string Description
         {
-            get { return telephone; }
-            set { telephone = value;
-                NotifyPropertyChanged(nameof(Telephone));
-            }
-        }
-
-        private string email;
-        public string Email
-        {
-            get { return email; }
-            set { email = value;
-                NotifyPropertyChanged(nameof(Email));
+            get { return description; }
+            set
+            {
+                description = value;
+                NotifyPropertyChanged(nameof(Description));
             }
         }
 

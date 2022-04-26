@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Verleihsystem.ViewModels;
 
 namespace Verleihsystem.Windows
 {
@@ -22,6 +23,8 @@ namespace Verleihsystem.Windows
         public EditAddCategory()
         {
             InitializeComponent();
+            var editAddCategoryViewModel = new EditAddCategoryViewModel();
+            DataContext = editAddCategoryViewModel;
         }
     }
 }
