@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Verleihsystem.UserControls.Customer"
+﻿<UserControl x:Class="Verleihsystem.UserControls.CustomerUserControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,7 +9,7 @@
     <Grid>
         <StackPanel Orientation="Horizontal" Name="stkBackground" Width="*">
 
-            <Label Name="customername" Content="Customer" VerticalAlignment="Center"/>
+            <Label Name="customername" Content="CustomerUserControl" VerticalAlignment="Center"/>
             <Label Name="customerid" Content="ID" VerticalAlignment="Center"/>
             <Label Name="customerTel" Content="Tel" VerticalAlignment="Center"/>
             <Label Name="customerEmail" Content="EMail" VerticalAlignment="Center"/>
