@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="50" d:DesignWidth="500">
     <Grid>
-        <StackPanel Orientation="Horizontal" Name="stkBackground">
+        <StackPanel Orientation="Horizontal" Name="stkBackground" Width="*">
             <Label Name="productname" Content="Name" VerticalAlignment="Center"/>
             <Label Name="categoryname" Content="Category" VerticalAlignment="Center"/>
             <Label Name="customer" Content="Customer" VerticalAlignment="Center"/>
