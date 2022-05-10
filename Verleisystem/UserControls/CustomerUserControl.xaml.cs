@@ -46,7 +46,7 @@ namespace Verleihsystem.UserControls
             set { customerTel.Content = value; }
         }
         [Category("Data"), Description("Email of CustomerUserControl")]
-        public string ProductName
+        public string CustomerEmail
         {
             get { return (string)customerEmail.Content; }
             set { customerEmail.Content = value; }
