@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="Verleihsystem.UserControls.Customer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Verleihsystem.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <StackPanel Orientation="Horizontal" Name="stkBackground" Width="*">
+
+            <Label Name="customername" Content="Customer" VerticalAlignment="Center"/>
+            <Label Name="customerid" Content="ID" VerticalAlignment="Center"/>
+            <Label Name="customerTel" Content="Tel" VerticalAlignment="Center"/>
+            <Label Name="customerEmail" Content="EMail" VerticalAlignment="Center"/>
+
+
+        </StackPanel>
+    </Grid>
+</UserControl>
