@@ -9,11 +9,11 @@
     <Grid>
         <Label Content="Name" Margin="34,45,308,260"/>
         <Label Content="Nr: XXXXXXX" Margin="242,45,55,255"/>
-        <TextBox HorizontalAlignment="Left" Margin="34,79,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="311" Background="#FFA49E9E"/>
+        <TextBox HorizontalAlignment="Left" Margin="34,79,0,0" TextWrapping="Wrap" Text="{Binding CategoryName}" VerticalAlignment="Top" Width="311" Background="#FFA49E9E"/>
         <Label Content="Beschreibung" Margin="34,121,262,184"/>
-        <TextBox HorizontalAlignment="Left" Margin="34,155,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="311" Background="#FFA49E9E" Height="97"/>
-        <Button Content="Abbrechen" HorizontalAlignment="Left" Margin="34,288,0,0" VerticalAlignment="Top"/>
-        <Button Content="Übernehmen" HorizontalAlignment="Left" Margin="272,288,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Margin="34,155,0,0" TextWrapping="Wrap" Text="{Binding Description}" VerticalAlignment="Top" Width="311" Background="#FFA49E9E" Height="97"/>
+        <Button Content="Abbrechen" HorizontalAlignment="Left" Margin="34,288,0,0" VerticalAlignment="Top" Command="{Binding AbortCommand}"/>
+        <Button Content="Übernehmen" HorizontalAlignment="Left" Margin="272,288,0,0" VerticalAlignment="Top" Command="{Binding ConfirmCommand}"/>
 
     </Grid>
 </Window>
