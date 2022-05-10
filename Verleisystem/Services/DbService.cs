@@ -17,32 +17,36 @@ namespace Verleihsystem.Services
 
         private List<Task> tasks = new();
 
-        public void GetAllCustomers()
+        public List<CustomerDto> GetAllCustomers()
         {
             var result = CallApi($"{BASE_URL}{GET}kunde.php");
             var list = JsonSerializer.Deserialize<List<CustomerDto>>(result);
             Console.WriteLine(result);
+            return list;
         }
 
-        public void GetAllEmployees()
+        public List<EmployeeDto> GetAllEmployees()
         {
             var result = CallApi($"{BASE_URL}{GET}mitarbeiter.php");
             var list = JsonSerializer.Deserialize<List<EmployeeDto>>(result);
             Console.WriteLine(result);
+            return list;
         }
 
-        public void GetAllProducts()
+        public List<ProductDto> GetAllProducts()
         {
             var result = CallApi($"{BASE_URL}{GET}produkt.php");
             var list = JsonSerializer.Deserialize<List<ProductDto>>(result);
             Console.WriteLine(result);
+            return list;
         }
 
-        public void GetAllCategories()
+        public List<CategoryDto> GetAllCategories()
         {
             var result = CallApi($"{BASE_URL}{GET}kategorie.php");
             var list = JsonSerializer.Deserialize<List<CategoryDto>>(result);
             Console.WriteLine(result);
+            return list;
         }
 
         public string CallApi(string url)

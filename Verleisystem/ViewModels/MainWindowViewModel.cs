@@ -19,8 +19,33 @@ namespace Verleihsystem.ViewModels
         public MainWindowViewModel(IServiceProvider serviceProvider)
         {
             MainWindowViewModel.serviceProvider = serviceProvider;
+            FillViews();
         }
 
+        public void FillViews()
+        {
+            UserControls = new();
+            var dbservice = serviceProvider.GetService(typeof(DbService)) as DbService;
+            dbservice.GetAllProducts().ForEach(x => UserControls.Add(new ProductUserControl
+            {
+                ProductName = x.Name,
+                CategoryName = x.Kategorie,
+                CustomerName = "empty",
+                BarcodeTxt = -1,
+                LendDate = DateTime.Now,
+                ReturnDate = DateTime.Now.AddDays(2),
+                Counter = -1,
+            }));
+        }
+
+        private ObservableCollection<ProductUserControl> userControls = new();
+        public ObservableCollection<ProductUserControl> UserControls
+        {
+            get { return userControls; }
+            set { userControls = value; 
+                NotifyPropertyChanged(nameof(UserControls));
+            }
+        }
 
         public ICommand OpenBorrowProductMenu = new RelayCommand<string>(_ =>
         {
