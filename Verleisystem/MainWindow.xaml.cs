@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Verleihsystem.Services;
+using Verleihsystem.ViewModels;
 
 namespace Verleisystem
 {
@@ -20,9 +22,21 @@ namespace Verleisystem
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        private IServiceProvider serviceProvider;
+        private DbService dbservice;
+
+        public MainWindow(MainWindowViewModel viewModel, DbService dbservice, IServiceProvider serviceProvider)
         {
+            DataContext = viewModel;
             InitializeComponent();
+            this.serviceProvider = serviceProvider;
+            this.dbservice = dbservice;
+        }
+
+        //Used for API testing
+        private void File_OnClick(object sender, RoutedEventArgs e)
+        {
+            dbservice.GetEmployee();
         }
     }
 }

@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="Verleihsystem.UserControls.ProductUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Verleihsystem.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="500">
+    <Grid>
+        <StackPanel Orientation="Horizontal" Name="stkBackground">
+            <Label Name="productname" Content="Name" VerticalAlignment="Center"/>
+            <Label Name="categoryname" Content="Category" VerticalAlignment="Center"/>
+            <Label Name="customer" Content="Customer" VerticalAlignment="Center"/>
+            <Label Name="barcodetxt" Content="BarcodeText" VerticalAlignment="Center"/>
+            <Image Name="barcodeimg" VerticalAlignment="Center"/>
+            <Label Name="lenddate" Content="LendDate" VerticalAlignment="Center"/>
+            <Label Name="returndate" Content="ReturnDate" VerticalAlignment="Center"/>
+            <Label Name="countTxt" Content="Count" VerticalAlignment="Center"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

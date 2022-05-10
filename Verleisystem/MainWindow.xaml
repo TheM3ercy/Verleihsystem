@@ -14,7 +14,7 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <Menu >
-            <MenuItem Header="File"/>
+            <MenuItem Header="File" Click="File_OnClick"/>
             <MenuItem Header="Home"/>
             <MenuItem Header="Ansicht"/>
         </Menu>
