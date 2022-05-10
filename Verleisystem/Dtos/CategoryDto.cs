@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Verleihsystem.Services;
 
-namespace Verleihsystem.ViewModels
+namespace Verleihsystem.Dtos
 {
-    public class MainWindowViewModel : ObservableObject
+    public class CategoryDto
     {
     }
 }

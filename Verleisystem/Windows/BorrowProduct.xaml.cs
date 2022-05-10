@@ -20,11 +20,10 @@ namespace Verleihsystem.Windows
     /// </summary>
     public partial class BorrowProduct : Window
     {
-        public BorrowProduct()
+        public BorrowProduct(BorrowProductViewModel viewModel)
         {
             InitializeComponent();
-            var borrowProductViewModel = new BorrowProductViewModel();
-            DataContext = borrowProductViewModel;
+            DataContext = viewModel;
         }
     }
 }

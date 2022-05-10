@@ -20,11 +20,10 @@ namespace Verleihsystem.Windows
     /// </summary>
     public partial class EditAddProduct : Window
     {
-        public EditAddProduct()
+        public EditAddProduct(EditAddProductViewModel viewModel)
         {
             InitializeComponent();
-            var editAddProductViewModel = new EditAddProductViewModel();
-            DataContext = editAddProductViewModel;
+            DataContext = viewModel;
         }
     }
 }

@@ -8,18 +8,18 @@
         Title="BorrowProduct" Height="458" Width="400">
     <Grid>
         <Label Content="Name" Margin="34,45,308,260"/>
-        <TextBox HorizontalAlignment="Left" Margin="34,79,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="311" Background="#FFA49E9E"/>
+        <TextBox HorizontalAlignment="Left" Margin="34,79,0,0" TextWrapping="Wrap" Text="{Binding ProductName}"  VerticalAlignment="Top" Width="311" Background="#FFA49E9E"/>
         <Label Content="Kategorie" Margin="34,115,274,190"/>
-        <TextBox HorizontalAlignment="Left" Margin="34,148,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="311" Background="#FFA49E9E"/>
+        <TextBox HorizontalAlignment="Left" Margin="34,148,0,0" TextWrapping="Wrap" Text="{Binding Category}" VerticalAlignment="Top" Width="311" Background="#FFA49E9E"/>
         <Label Content="Ausgeliehen Zwischen" Margin="34,187,218,118"/>
-        <TextBox HorizontalAlignment="Left" Margin="34,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="128" Background="#FFA49E9E"/>
-        <TextBox HorizontalAlignment="Left" Margin="217,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="128" Background="#FFA49E9E"/>
+        <TextBox Text="{Binding StartDate}" HorizontalAlignment="Left" Margin="34,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="128" Background="#FFA49E9E"/>
+        <TextBox Text="{Binding EndDate}" HorizontalAlignment="Left" Margin="217,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="128" Background="#FFA49E9E"/>
         <Label Content="-" HorizontalAlignment="Left" Margin="182,216,0,0" VerticalAlignment="Top"/>
         <Label Content="Von Kunden" Margin="34,254,274,102"/>
-        <TextBox HorizontalAlignment="Left" Margin="34,287,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="311" Background="#FFA49E9E"/>
+        <TextBox HorizontalAlignment="Left" Margin="34,287,0,0" TextWrapping="Wrap" Text="{Binding Customer}" VerticalAlignment="Top" Width="311" Background="#FFA49E9E"/>
         <Label Content="Mitarbeiter" Margin="34,316,274,40"/>
-        <TextBox HorizontalAlignment="Left" Margin="34,348,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="311" Background="#FFA49E9E"/>
-        <Button Content="Abbrechen" HorizontalAlignment="Left" Margin="32,402,0,0" VerticalAlignment="Top"/>
-        <Button Content="Übernehmen" HorizontalAlignment="Left" Margin="270,402,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Margin="34,348,0,0" TextWrapping="Wrap" Text="{Binding Employee}" VerticalAlignment="Top" Width="311" Background="#FFA49E9E"/>
+        <Button Content="Abbrechen" HorizontalAlignment="Left" Margin="32,402,0,0" VerticalAlignment="Top" Command="{Binding AbortCommand}"/>
+        <Button Content="Übernehmen" HorizontalAlignment="Left" Margin="270,402,0,0" VerticalAlignment="Top" Command="{Binding ConfirmCommand}"/>
     </Grid>
 </Window>

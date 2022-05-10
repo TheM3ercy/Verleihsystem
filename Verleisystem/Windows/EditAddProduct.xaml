@@ -10,13 +10,13 @@
 
         <Label Content="Name" Margin="34,45,308,260"/>
         <Label Content="Nr: XXXXXXX" Margin="242,45,55,255"/>
-        <TextBox HorizontalAlignment="Left" Margin="34,79,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="311" Background="#FFA49E9E"/>
+        <TextBox HorizontalAlignment="Left" Margin="34,79,0,0" TextWrapping="Wrap" Text="{Binding ProductName}" VerticalAlignment="Top" Width="311" Background="#FFA49E9E"/>
         <Label Content="Code" Margin="34,121,308,184"/>
-        <TextBox HorizontalAlignment="Left" Margin="34,155,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="311" Background="#FFA49E9E"/>
+        <TextBox HorizontalAlignment="Left" Margin="34,155,0,0" TextWrapping="Wrap" Text="{Binding Code}" VerticalAlignment="Top" Width="311" Background="#FFA49E9E"/>
         <Label Content="Kategorie" Margin="34,203,308,102"/>
-        <ComboBox HorizontalAlignment="Left" Margin="34,237,0,0" Text="" VerticalAlignment="Top" Width="311" Background="#FFA49E9E"/>
-        <Button Content="Abbrechen" HorizontalAlignment="Left" Margin="34,288,0,0" VerticalAlignment="Top"/>
-        <Button Content="Übernehmen" HorizontalAlignment="Left" Margin="272,288,0,0" VerticalAlignment="Top"/>
+        <ComboBox HorizontalAlignment="Left" Margin="34,237,0,0" Text="" VerticalAlignment="Top" Width="311" Background="#FFA49E9E" ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory}"/>
+        <Button Content="Abbrechen" HorizontalAlignment="Left" Margin="34,288,0,0" VerticalAlignment="Top" Command="{Binding AbortCommand}"/>
+        <Button Content="Übernehmen" HorizontalAlignment="Left" Margin="272,288,0,0" VerticalAlignment="Top" Command="{Binding ConfirmCommand}"/>
         
     </Grid>
 </Window>

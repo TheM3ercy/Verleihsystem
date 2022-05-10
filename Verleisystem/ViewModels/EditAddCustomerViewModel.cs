@@ -39,7 +39,7 @@ namespace Verleihsystem.ViewModels
         }
 
         public ICommand AbortCommand = new RelayCommand<Window>(x => x.Close());
-        public ICommand ContinueCommand = new RelayCommand<string>(_ =>
+        public ICommand ConfirmCommand = new RelayCommand<string>(_ =>
         {
             if (false/*Database contains name*/)
             {

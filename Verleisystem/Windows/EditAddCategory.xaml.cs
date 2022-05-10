@@ -20,11 +20,10 @@ namespace Verleihsystem.Windows
     /// </summary>
     public partial class EditAddCategory : Window
     {
-        public EditAddCategory()
+        public EditAddCategory(EditAddCategoryViewModel viewModel)
         {
             InitializeComponent();
-            var editAddCategoryViewModel = new EditAddCategoryViewModel();
-            DataContext = editAddCategoryViewModel;
+            DataContext = viewModel;
         }
     }
 }
