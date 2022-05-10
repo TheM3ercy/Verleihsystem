@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace Verleihsystem.Dtos
 {
-    public class CategoryDto
+    public class ProductDto
     {
         public string Id { get; set; }
         public string Name { get; set; }
-        public string Beschreibung { get; set; }
+        public string Code { get; set; }
+        public string Kategorie { get; set; }
     }
 }

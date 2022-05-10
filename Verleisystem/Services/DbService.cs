@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Verleihsystem.Dtos;
 
@@ -16,38 +17,41 @@ namespace Verleihsystem.Services
 
         private List<Task> tasks = new();
 
-        public void GetCustomers()
+        public void GetAllCustomers()
         {
-            var result = CallApi($"{BASE_URL}{GET}kunden.php");
-            result.ForEach(x => Console.WriteLine(x));
+            var result = CallApi($"{BASE_URL}{GET}kunde.php");
+            var list = JsonSerializer.Deserialize<List<CustomerDto>>(result);
+            Console.WriteLine(result);
         }
 
-        public void GetEmployee()
+        public void GetAllEmployees()
         {
-            var result = CallApi($"{BASE_URL}{GET}mitarbeiter.php?username=test&password=test");
-            result.ForEach(x => Console.WriteLine(x));
+            var result = CallApi($"{BASE_URL}{GET}mitarbeiter.php");
+            var list = JsonSerializer.Deserialize<List<EmployeeDto>>(result);
+            Console.WriteLine(result);
         }
 
-        public void GetProduct()
+        public void GetAllProducts()
         {
-            var result = CallApi($"{BASE_URL}{GET}product.php");
-            result.ForEach(x => Console.WriteLine(x));
+            var result = CallApi($"{BASE_URL}{GET}produkt.php");
+            var list = JsonSerializer.Deserialize<List<ProductDto>>(result);
+            Console.WriteLine(result);
         }
 
-        public void GetCategories()
+        public void GetAllCategories()
         {
             var result = CallApi($"{BASE_URL}{GET}kategorie.php");
-            result.ForEach(x => Console.WriteLine(x));
+            var list = JsonSerializer.Deserialize<List<CategoryDto>>(result);
+            Console.WriteLine(result);
         }
 
-        public List<string> CallApi(string url)
+        public string CallApi(string url)
         {
             List<string> response = new();
             using (var client = new HttpClient())
             { 
-                response.Add(client.GetStringAsync(url).Result);
+                return client.GetStringAsync(url).Result;
             }
-            return response;
         }
     }
 }

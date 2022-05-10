@@ -36,7 +36,10 @@ namespace Verleisystem
         //Used for API testing
         private void File_OnClick(object sender, RoutedEventArgs e)
         {
-            dbservice.GetEmployee();
+            dbservice.GetAllEmployees();
+            dbservice.GetAllProducts();
+            dbservice.GetAllCustomers();
+            dbservice.GetAllCategories();
         }
     }
 }
