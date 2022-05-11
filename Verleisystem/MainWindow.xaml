@@ -35,7 +35,7 @@
                 <UserControls:ProductUserControl />-->
             </ListBox>
         </StackPanel>
-        <ListView HorizontalAlignment="Left" Height="2406" Margin="-157,10,0,0" Grid.Row="2" VerticalAlignment="Top" Width="1960" ItemsSource="{Binding UserControls}">
+        <ListView HorizontalAlignment="Left" Height="2406" Margin="0,10,0,0" Grid.Row="2" VerticalAlignment="Top" Width="1960" ItemsSource="{Binding UserControls}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>

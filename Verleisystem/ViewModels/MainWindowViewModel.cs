@@ -14,11 +14,11 @@ namespace Verleihsystem.ViewModels
 {
     public class MainWindowViewModel : ObservableObject
     {
-        private static IServiceProvider serviceProvider;
+        private IServiceProvider serviceProvider;
 
         public MainWindowViewModel(IServiceProvider serviceProvider)
         {
-            MainWindowViewModel.serviceProvider = serviceProvider;
+            this.serviceProvider = serviceProvider;
             FillViews();
         }
 
@@ -26,16 +26,22 @@ namespace Verleihsystem.ViewModels
         {
             UserControls = new();
             var dbservice = serviceProvider.GetService(typeof(DbService)) as DbService;
-            dbservice.GetAllProducts().ForEach(x => UserControls.Add(new ProductUserControl
+            dbservice.GetAllProducts().ForEach(x =>
             {
-                ProductName = x.Name,
-                CategoryName = x.Kategorie,
-                CustomerName = "empty",
-                BarcodeTxt = -1,
-                LendDate = DateTime.Now,
-                ReturnDate = DateTime.Now.AddDays(2),
-                Counter = -1,
-            }));
+                var userControl = new ProductUserControl
+                {
+                    ProductName = x.name,
+                    CategoryName = x.kategorie,
+                    CustomerName = "empty",
+                    BarcodeTxt = -1,
+                    LendDate = DateTime.Now,
+                    ReturnDate = DateTime.Now.AddDays(2),
+                    Counter = -1,
+                };
+                userControl.SelectedEvent += ProductUserControlSelected;
+                userControl.EditEvent += ProductUserControlEdit;
+                UserControls.Add(userControl);
+            });
         }
 
         private ObservableCollection<ProductUserControl> userControls = new();
@@ -47,28 +53,42 @@ namespace Verleihsystem.ViewModels
             }
         }
 
-        public ICommand OpenBorrowProductMenu = new RelayCommand<string>(_ =>
-        {
-            var window = serviceProvider.GetService(typeof(BorrowProduct)) as Window;
-            window.Show();
-        });
-
-        public ICommand OpenEditAddCategoryWindow = new RelayCommand<string>(_ =>
-        {
-            var window = serviceProvider.GetService(typeof(EditAddCategory)) as Window;
-            window.Show();
-        });
-
-        public ICommand OpenEditAddCustomerWindow = new RelayCommand<string>(_ =>
-        {
-            var window = serviceProvider.GetService(typeof(EditAddCustomer)) as Window;
-            window.Show();
-        });
-
-        public ICommand OpenEditAddProductWindow = new RelayCommand<string>(_ =>
+        public void ProductUserControlSelected(object sender, ProductUserControlSelectedEventArgs e)
         {
             var window = serviceProvider.GetService(typeof(EditAddProduct)) as Window;
             window.Show();
-        });
+        }
+
+        public void ProductUserControlEdit(object sender, ProductUserControlSelectedEventArgs e)
+        {
+            var window = serviceProvider.GetService(typeof(BorrowProduct)) as Window;
+            window.Show();
+        }
+
+        #region
+        //public ICommand OpenBorrowProductMenu = new RelayCommand<string>(_ =>
+        //{
+        //    var window = serviceProvider.GetService(typeof(BorrowProduct)) as Window;
+        //    window.Show();
+        //});
+
+        //public ICommand OpenEditAddCategoryWindow = new RelayCommand<string>(_ =>
+        //{
+        //    var window = serviceProvider.GetService(typeof(EditAddCategory)) as Window;
+        //    window.Show();
+        //});
+
+        //public ICommand OpenEditAddCustomerWindow = new RelayCommand<string>(_ =>
+        //{
+        //    var window = serviceProvider.GetService(typeof(EditAddCustomer)) as Window;
+        //    window.Show();
+        //});
+
+        //public ICommand OpenEditAddProductWindow = new RelayCommand<string>(_ =>
+        //{
+        //    var window = serviceProvider.GetService(typeof(EditAddProduct)) as Window;
+        //    window.Show();
+        //});
+        #endregion
     }
 }

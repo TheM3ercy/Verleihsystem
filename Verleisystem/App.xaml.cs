@@ -29,10 +29,10 @@ namespace Verleisystem
 
         private void ConfigureServices(IConfiguration configuration, IServiceCollection services)
         {
-            services.AddSingleton<BorrowProductViewModel>();
-            services.AddSingleton<EditAddCategoryViewModel>();
-            services.AddSingleton<EditAddCustomerViewModel>();
-            services.AddSingleton<EditAddProductViewModel>();
+            services.AddTransient<BorrowProductViewModel>();
+            services.AddTransient<EditAddCategoryViewModel>();
+            services.AddTransient<EditAddCustomerViewModel>();
+            services.AddTransient<EditAddProductViewModel>();
             services.AddSingleton<MainWindowViewModel>();
 
             services.AddTransient<BorrowProduct>();
