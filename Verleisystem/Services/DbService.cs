@@ -19,7 +19,7 @@ namespace Verleihsystem.Services
 
         public List<CustomerDto> GetAllCustomers()
         {
-            var result = CallApi($"{BASE_URL}{GET}kunde.php");
+            var result = CallApiGet($"{BASE_URL}{GET}kunde.php");
             var list = JsonSerializer.Deserialize<List<CustomerDto>>(result);
             Console.WriteLine(result);
             return list;
@@ -27,7 +27,7 @@ namespace Verleihsystem.Services
 
         public List<EmployeeDto> GetAllEmployees()
         {
-            var result = CallApi($"{BASE_URL}{GET}mitarbeiter.php");
+            var result = CallApiGet($"{BASE_URL}{GET}mitarbeiter.php");
             var list = JsonSerializer.Deserialize<List<EmployeeDto>>(result);
             Console.WriteLine(result);
             return list;
@@ -35,7 +35,7 @@ namespace Verleihsystem.Services
 
         public List<ProductDto> GetAllProducts()
         {
-            var result = CallApi($"{BASE_URL}{GET}produkt.php");
+            var result = CallApiGet($"{BASE_URL}{GET}produkt.php");
             var list = JsonSerializer.Deserialize<List<ProductDto>>(result);
             Console.WriteLine(result);
             return list;
@@ -43,17 +43,51 @@ namespace Verleihsystem.Services
 
         public List<CategoryDto> GetAllCategories()
         {
-            var result = CallApi($"{BASE_URL}{GET}kategorie.php");
+            var result = CallApiGet($"{BASE_URL}{GET}kategorie.php");
             var list = JsonSerializer.Deserialize<List<CategoryDto>>(result);
             Console.WriteLine(result);
             return list;
         }
 
-        public string CallApi(string url)
+        public string PostCustomer(CustomerDto customer)
+        {
+            return "not implemented";
+        }
+
+        public string PostEmployee(EmployeeDto employee)
+        {
+            return "not implemented";
+        }
+
+        public string PostProduct(ProductDto product)
+        {
+            return "not implemented";
+        }
+
+        public string GetAllCategories(CategoryDto category)
+        {
+            return "not implemented";
+        }
+
+        public string LendProduct(int productId, int customerId)
+        {
+            return "not implemented";
+        }
+
+        public string CallApiGet(string url)
         {
             List<string> response = new();
             using (var client = new HttpClient())
             { 
+                return client.GetStringAsync(url).Result;
+            }
+        }
+
+        public string CallApiPost(string url)
+        {
+
+            using (var client = new HttpClient())
+            {
                 return client.GetStringAsync(url).Result;
             }
         }

@@ -40,7 +40,7 @@ namespace Verleihsystem.UserControls
             set { categoryid.Content = value; }
         }
         [Category("Data"), Description("Description of Category")]
-        public string CategoryDesription
+        public string CategoryDescription
         {
             get { return (string)categoryDescripton.Content; }
             set { categoryDescripton.Content = value; }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using Verleihsystem.Services;
 using Verleihsystem.UserControls;
@@ -15,18 +16,55 @@ namespace Verleihsystem.ViewModels
     public class MainWindowViewModel : ObservableObject
     {
         private IServiceProvider serviceProvider;
+        private DbService dbService;
 
         public MainWindowViewModel(IServiceProvider serviceProvider)
         {
             this.serviceProvider = serviceProvider;
-            FillViews();
+            if (serviceProvider.GetService(typeof(DbService)) == null) throw new ArgumentNullException();
+            dbService = serviceProvider.GetService(typeof(DbService)) as DbService;
+            if (dbService == null) throw new ArgumentNullException();
+            FillWithProductUserControls();
         }
 
-        public void FillViews()
+        private void FillWithCategoryUserControls()
         {
             UserControls = new();
             var dbservice = serviceProvider.GetService(typeof(DbService)) as DbService;
-            dbservice.GetAllProducts().ForEach(x =>
+            dbservice!.GetAllCategories().ForEach(x =>
+            {
+                var userControl = new CategoryUserControl
+                {
+                   CategoryId = x.id,
+                   CategoryName = x.name,
+                   CategoryDescription = x.beschreibung,
+                };
+                UserControls.Add(userControl);
+            });
+        }
+
+        private void FillWithCustomerUserControls()
+        {
+            UserControls = new();
+            var dbservice = serviceProvider.GetService(typeof(DbService)) as DbService;
+            dbservice!.GetAllCustomers().ForEach(x =>
+            {
+                var userControl = new CustomerUserControl
+                {
+                    CustomerId = x.Id,
+                    CustomerName = x.Name,
+                    CustomerEmail = x.Email,
+                    CustomerTel = x.Tel,
+                };
+                UserControls.Add(userControl);
+            });
+        }
+
+        private void FillWithProductUserControls()
+        {
+            UserControls = new();
+            var dbservice = serviceProvider.GetService(typeof(DbService)) as DbService;
+            dbservice!.GetAllProducts().ForEach(x =>
             {
                 var userControl = new ProductUserControl
                 {
@@ -44,8 +82,8 @@ namespace Verleihsystem.ViewModels
             });
         }
 
-        private ObservableCollection<ProductUserControl> userControls = new();
-        public ObservableCollection<ProductUserControl> UserControls
+        private ObservableCollection<UserControl> userControls = new();
+        public ObservableCollection<UserControl> UserControls
         {
             get { return userControls; }
             set { userControls = value; 
