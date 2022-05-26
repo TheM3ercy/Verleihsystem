@@ -11,11 +11,12 @@ namespace Verleihsystem.Services
 {
     public class DbService
     {
-        const string BASE_URL = "https://omnic-systems.com/verleihsystem/";
-        const string GET = "get/";
-        const string PUSH = "push/";
+        private const string BASE_URL = "https://omnic-systems.com/verleihsystem/";
+        private const string GET = "get/";
+        private const string POST = "post/";
+        private const string PUSH = "push/";
 
-        private List<Task> tasks = new();
+        private static readonly HttpClient client = new HttpClient();
 
         public List<CustomerDto> GetAllCustomers()
         {
@@ -51,22 +52,47 @@ namespace Verleihsystem.Services
 
         public string PostCustomer(CustomerDto customer)
         {
-            return "not implemented";
+            var result = CallApiPost($"{BASE_URL}{POST}customer.php", 
+                new Dictionary<string, string> { 
+                    { "id", customer.Id},
+                    { "name", customer.Name},
+                    { "email", customer.Email },
+                    { "tel", customer.Tel },
+                });
+            return result;
         }
 
         public string PostEmployee(EmployeeDto employee)
         {
-            return "not implemented";
+            var result = CallApiPost($"{BASE_URL}{POST}employee.php",
+                new Dictionary<string, string> {
+                    { "id", employee.id},
+                    { "username", employee.username},
+                });
+            return result;
         }
 
         public string PostProduct(ProductDto product)
         {
-            return "not implemented";
+            var result = CallApiPost($"{BASE_URL}{POST}produkt.php",
+                new Dictionary<string, string> {
+                    { "id", product.id},
+                    { "name", product.name},
+                    { "kategorie", product.kategorie},
+                    { "code", product.code },
+                });
+            return result;
         }
 
-        public string GetAllCategories(CategoryDto category)
+        public string PostCategory(CategoryDto category)
         {
-            return "not implemented";
+            var result = CallApiPost($"{BASE_URL}{POST}kategorie.php",
+                new Dictionary<string, string> {
+                    { "id", category.id},
+                    { "name", category.name},
+                    { "beschreibung", category.beschreibung},
+                });
+            return result;
         }
 
         public string LendProduct(int productId, int customerId)
@@ -77,19 +103,13 @@ namespace Verleihsystem.Services
         public string CallApiGet(string url)
         {
             List<string> response = new();
-            using (var client = new HttpClient())
-            { 
-                return client.GetStringAsync(url).Result;
-            }
+            return client.GetStringAsync(url).Result;
         }
 
-        public string CallApiPost(string url)
+        public string CallApiPost(string url, IEnumerable<KeyValuePair<string, string>> content)
         {
-
-            using (var client = new HttpClient())
-            {
-                return client.GetStringAsync(url).Result;
-            }
+            var body = new FormUrlEncodedContent(content);
+            return client.PostAsync(url, body).Result.Content.ToString();
         }
     }
 }

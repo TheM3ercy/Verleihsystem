@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Verleihsystem.Windows"
         mc:Ignorable="d"
-        Title="BorrowProduct" Height="458" Width="400">
+        Title="BorrowProduct" Height="458" Width="400"
+        DataContext="BorrowProductViewModel">
+
     <Grid>
         <Label Content="Name" Margin="34,45,308,260"/>
         <TextBox HorizontalAlignment="Left" Margin="34,79,0,0" TextWrapping="Wrap" Text="{Binding ProductName}"  VerticalAlignment="Top" Width="311" Background="#FFA49E9E"/>
@@ -20,6 +22,6 @@
         <Label Content="Mitarbeiter" Margin="34,316,274,40"/>
         <TextBox HorizontalAlignment="Left" Margin="34,348,0,0" TextWrapping="Wrap" Text="{Binding Employee}" VerticalAlignment="Top" Width="311" Background="#FFA49E9E"/>
         <Button Content="Abbrechen" HorizontalAlignment="Left" Margin="32,402,0,0" VerticalAlignment="Top" Command="{Binding AbortCommand}"/>
-        <Button Content="Übernehmen" HorizontalAlignment="Left" Margin="270,402,0,0" VerticalAlignment="Top" Command="{Binding ConfirmCommand}"/>
+        <Button Content="Übernehmen" HorizontalAlignment="Left" Margin="270,402,0,0" VerticalAlignment="Top" Command="{Binding ConfirmCommand}" />
     </Grid>
 </Window>
