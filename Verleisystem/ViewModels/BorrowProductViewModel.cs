@@ -17,6 +17,7 @@ namespace Verleihsystem.ViewModels
             get { return productName; }
             set { productName = value;
                 NotifyPropertyChanged(nameof(ProductName));
+                ConfirmCommand.Execute(productName);
             }
         }
 
@@ -68,6 +69,7 @@ namespace Verleihsystem.ViewModels
         public ICommand AbortCommand = new RelayCommand<Window>(x => x.Close());
         public ICommand ConfirmCommand = new RelayCommand<string>(_ =>
         {
+            throw new NotImplementedException();
             if (false/*Database contains name*/)
             {
                 /*Edit Database entry*/

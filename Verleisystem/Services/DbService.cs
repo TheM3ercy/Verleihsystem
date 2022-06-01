@@ -11,15 +11,16 @@ namespace Verleihsystem.Services
 {
     public class DbService
     {
-        const string BASE_URL = "https://omnic-systems.com/verleihsystem/";
-        const string GET = "get/";
-        const string PUSH = "push/";
+        private const string BASE_URL = "https://omnic-systems.com/verleihsystem/";
+        private const string GET = "get/";
+        private const string POST = "post/";
+        private const string PUSH = "push/";
 
-        private List<Task> tasks = new();
+        private static readonly HttpClient client = new HttpClient();
 
         public List<CustomerDto> GetAllCustomers()
         {
-            var result = CallApi($"{BASE_URL}{GET}kunde.php");
+            var result = CallApiGet($"{BASE_URL}{GET}kunde.php");
             var list = JsonSerializer.Deserialize<List<CustomerDto>>(result);
             Console.WriteLine(result);
             return list;
@@ -27,7 +28,7 @@ namespace Verleihsystem.Services
 
         public List<EmployeeDto> GetAllEmployees()
         {
-            var result = CallApi($"{BASE_URL}{GET}mitarbeiter.php");
+            var result = CallApiGet($"{BASE_URL}{GET}mitarbeiter.php");
             var list = JsonSerializer.Deserialize<List<EmployeeDto>>(result);
             Console.WriteLine(result);
             return list;
@@ -35,7 +36,7 @@ namespace Verleihsystem.Services
 
         public List<ProductDto> GetAllProducts()
         {
-            var result = CallApi($"{BASE_URL}{GET}produkt.php");
+            var result = CallApiGet($"{BASE_URL}{GET}produkt.php");
             var list = JsonSerializer.Deserialize<List<ProductDto>>(result);
             Console.WriteLine(result);
             return list;
@@ -43,19 +44,72 @@ namespace Verleihsystem.Services
 
         public List<CategoryDto> GetAllCategories()
         {
-            var result = CallApi($"{BASE_URL}{GET}kategorie.php");
+            var result = CallApiGet($"{BASE_URL}{GET}kategorie.php");
             var list = JsonSerializer.Deserialize<List<CategoryDto>>(result);
             Console.WriteLine(result);
             return list;
         }
 
-        public string CallApi(string url)
+        public string PostCustomer(CustomerDto customer)
+        {
+            var result = CallApiPost($"{BASE_URL}{POST}customer.php", 
+                new Dictionary<string, string> { 
+                    { "id", customer.Id},
+                    { "name", customer.Name},
+                    { "email", customer.Email },
+                    { "tel", customer.Tel },
+                });
+            return result;
+        }
+
+        public string PostEmployee(EmployeeDto employee)
+        {
+            var result = CallApiPost($"{BASE_URL}{POST}employee.php",
+                new Dictionary<string, string> {
+                    { "id", employee.id},
+                    { "username", employee.username},
+                });
+            return result;
+        }
+
+        public string PostProduct(ProductDto product)
+        {
+            var result = CallApiPost($"{BASE_URL}{POST}produkt.php",
+                new Dictionary<string, string> {
+                    { "id", product.id},
+                    { "name", product.name},
+                    { "kategorie", product.kategorie},
+                    { "code", product.code },
+                });
+            return result;
+        }
+
+        public string PostCategory(CategoryDto category)
+        {
+            var result = CallApiPost($"{BASE_URL}{POST}kategorie.php",
+                new Dictionary<string, string> {
+                    { "id", category.id},
+                    { "name", category.name},
+                    { "beschreibung", category.beschreibung},
+                });
+            return result;
+        }
+
+        public string LendProduct(int productId, int customerId)
+        {
+            return "not implemented";
+        }
+
+        public string CallApiGet(string url)
         {
             List<string> response = new();
-            using (var client = new HttpClient())
-            { 
-                return client.GetStringAsync(url).Result;
-            }
+            return client.GetStringAsync(url).Result;
+        }
+
+        public string CallApiPost(string url, IEnumerable<KeyValuePair<string, string>> content)
+        {
+            var body = new FormUrlEncodedContent(content);
+            return client.PostAsync(url, body).Result.Content.ToString();
         }
     }
 }

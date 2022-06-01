@@ -29,13 +29,13 @@
              </StackPanel>
             
             <ListBox MinHeight="400">
-                <UserControls:ProductUserControl />
+                <!--<UserControls:ProductUserControl />
                 <UserControls:ProductUserControl  CategoryName="Categoryname" ProductName="Testname" CustomerName="Tetscustomer" BarcodeTxt="58555"  Counter="12"/>
                 <UserControls:ProductUserControl />
-                <UserControls:ProductUserControl />
+                <UserControls:ProductUserControl />-->
             </ListBox>
         </StackPanel>
-        <ListView HorizontalAlignment="Left" Height="2406" Margin="-157,10,0,0" Grid.Row="2" VerticalAlignment="Top" Width="1960" ItemsSource="{Binding UserControls}">
+        <ListView HorizontalAlignment="Left" Height="2406" Margin="0,10,0,0" Grid.Row="2" VerticalAlignment="Top" Width="1960" ItemsSource="{Binding UserControls}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>

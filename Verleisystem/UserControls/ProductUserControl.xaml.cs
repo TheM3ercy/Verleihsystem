@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Verleihsystem.Services;
+using Verleihsystem.ViewModels;
 
 namespace Verleihsystem.UserControls
 {
@@ -21,9 +23,24 @@ namespace Verleihsystem.UserControls
     /// </summary>
     public partial class ProductUserControl : UserControl
     {
+        public event EventHandler<ProductUserControlSelectedEventArgs> SelectedEvent;
+        public event EventHandler<ProductUserControlSelectedEventArgs> EditEvent;
+
         public ProductUserControl()
         {
             InitializeComponent();
+            stkBackground.MouseRightButtonDown += OnRightClickListener;
+            stkBackground.MouseLeftButtonDown += OnLeftClickListener;
+        }
+
+        public void OnRightClickListener(object sender, RoutedEventArgs e)
+        {
+            SelectedEvent?.Invoke(sender, new ProductUserControlSelectedEventArgs { Name = ProductName});
+        }
+
+        public void OnLeftClickListener(object sender, RoutedEventArgs e)
+        {
+            EditEvent?.Invoke(sender, new ProductUserControlSelectedEventArgs { Name = ProductName });
         }
 
         [Category("Data"), Description("Name of product")]
