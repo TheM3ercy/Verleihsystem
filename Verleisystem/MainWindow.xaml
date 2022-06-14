@@ -18,7 +18,9 @@
             <MenuItem Header="Home" Command="{Binding TestCommand, Mode=OneWay}"/>
             <MenuItem Header="Ansicht"/>
         </Menu>
-        <StackPanel Grid.Row="1" Background="LightGray"/>
+        <StackPanel Grid.Row="1" Background="LightGray">
+            <UserControls:HomeRibbon Height="*"/>
+        </StackPanel>
 
 
 
