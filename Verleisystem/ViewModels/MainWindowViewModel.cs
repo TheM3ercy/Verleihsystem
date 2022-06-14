@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Verleihsystem.Services;
+using Verleihsystem.Services.EventArgs;
 using Verleihsystem.UserControls;
 using Verleihsystem.Windows;
 
@@ -25,6 +26,27 @@ namespace Verleihsystem.ViewModels
             dbService = serviceProvider.GetService(typeof(DbService)) as DbService;
             if (dbService == null) throw new ArgumentNullException();
             FillWithProductUserControls();
+        }
+
+        public void Selected(object sender, ViewRibbonSelectedEventArgs e)
+        {
+            switch (e.ViewContent){
+                case 1:
+                    {
+                        FillWithCustomerUserControls();
+                        break;
+                    }
+                case 2:
+                    {
+                        FillWithCategoryUserControls();
+                        break;
+                    }
+                case 3:
+                    {
+                        FillWithProductUserControls();
+                        break;
+                    }
+            }
         }
 
         private void FillWithCategoryUserControls()
@@ -102,7 +124,6 @@ namespace Verleihsystem.ViewModels
             var window = serviceProvider.GetService(typeof(BorrowProduct)) as Window;
             window.Show();
         }
-
         #region
         //public ICommand OpenBorrowProductMenu = new RelayCommand<string>(_ =>
         //{

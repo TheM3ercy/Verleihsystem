@@ -50,6 +50,14 @@ namespace Verleihsystem.Services
             return list;
         }
 
+        public List<ProductDto> GetAllLeasedProducts()
+        {
+            var result = CallApiGet($"{BASE_URL}{GET}ausgelieheneProdukte.php");
+            var list = JsonSerializer.Deserialize<List<ProductDto>>(result);
+            Console.WriteLine(result);
+            return list;
+        }
+
         public string PostCustomer(CustomerDto customer)
         {
             var result = CallApiPost($"{BASE_URL}{POST}customer.php", 
@@ -64,7 +72,7 @@ namespace Verleihsystem.Services
 
         public string PostEmployee(EmployeeDto employee)
         {
-            var result = CallApiPost($"{BASE_URL}{POST}employee.php",
+            var result = CallApiPost($"{BASE_URL}{POST}mitarbeiter.php",
                 new Dictionary<string, string> {
                     { "id", employee.id},
                     { "username", employee.username},
@@ -95,6 +103,18 @@ namespace Verleihsystem.Services
             return result;
         }
 
+        public string PostLeasedProduct(ProductDto product)
+        {
+            var result = CallApiLease($"{BASE_URL}{POST}ausgelieheneProdukte.php",
+                new Dictionary<string, string> {
+                    { "id", product.id},
+                    { "name", product.name},
+                    { "kategorie", product.kategorie},
+                    { "code", product.code },
+                });
+            return result;
+        }
+
         public string LendProduct(int productId, int customerId)
         {
             return "not implemented";
@@ -107,6 +127,12 @@ namespace Verleihsystem.Services
         }
 
         public string CallApiPost(string url, IEnumerable<KeyValuePair<string, string>> content)
+        {
+            var body = new FormUrlEncodedContent(content);
+            return client.PostAsync(url, body).Result.Content.ToString();
+        }
+
+        public string CallApiLease(string url, IEnumerable<KeyValuePair<string, string>> content)
         {
             var body = new FormUrlEncodedContent(content);
             return client.PostAsync(url, body).Result.Content.ToString();

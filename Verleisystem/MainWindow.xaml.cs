@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Verleihsystem.Dtos;
 using Verleihsystem.Services;
 using Verleihsystem.ViewModels;
 
@@ -36,10 +37,9 @@ namespace Verleisystem
         //Used for API testing
         private void File_OnClick(object sender, RoutedEventArgs e)
         {
-            dbservice.GetAllEmployees();
             dbservice.GetAllProducts();
-            dbservice.GetAllCustomers();
-            dbservice.GetAllCategories();
+            dbservice.PostProduct(new ProductDto { name = "testproduct", code = "123", kategorie = "1"});
+            dbservice.GetAllProducts();
         }
     }
 }

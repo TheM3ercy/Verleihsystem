@@ -7,15 +7,15 @@ using System.Windows.Input;
 
 namespace Verleihsystem.Services
 {
-    internal class RelayCommand<T> : ICommand
+    public class RelayCommand<T> : ICommand
     {
-        private readonly Action<T> _execute;
-        private readonly Predicate<T> _canExecute;
+        private readonly Action<T?> _execute;
+        private readonly Predicate<T?>? _canExecute;
 
         public RelayCommand(Action<T?> execute) : this(execute, null)
         { }
 
-        public RelayCommand(Action<T?> execute, Predicate<T?> canExecute)
+        public RelayCommand(Action<T?> execute, Predicate<T?>? canExecute)
         { 
             _execute = execute ?? throw new ArgumentNullException(nameof(execute));
             _canExecute = canExecute;

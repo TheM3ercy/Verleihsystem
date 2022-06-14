@@ -8,13 +8,13 @@
              d:DesignHeight="110" d:DesignWidth="800">
     <Grid>
         <StackPanel Orientation="Horizontal">
-            <Button Width="100" Margin="10">Rückgaben</Button>
-            <Button Width="100" Margin="10">Kunden</Button>
-            <Button Width="100" Margin="10">Kategorien</Button>
-            <Button Width="100" Margin="10">Produkte
+            <Button Width="100" Margin="10" Click="Rueckgaben_Click">Rückgaben</Button>
+            <Button Width="100" Margin="10" Click="Kunden_Click">Kunden</Button>
+            <Button Width="100" Margin="10" Click="Kategorien_Click">Kategorien</Button>
+            <Button Width="100" Margin="10" Click="Produkte_Click">Produkte
             </Button>
-            <Button Width="100" Margin="10">Erweiterte Suche</Button>
-            <Button Width="100" Margin="10">Filter</Button>
+            <Button Width="100" Margin="10" Click="Search_Click">Erweiterte Suche</Button>
+            <Button Width="100" Margin="10" Click="Filter_Click">Filter</Button>
         </StackPanel>
 
     </Grid>
