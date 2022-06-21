@@ -50,10 +50,10 @@ namespace Verleihsystem.Services
             return list;
         }
 
-        public List<ProductDto> GetAllLeasedProducts()
+        public List<LeaseDto> GetAllLeasedProducts()
         {
             var result = CallApiGet($"{BASE_URL}{GET}ausgelieheneProdukte.php");
-            var list = JsonSerializer.Deserialize<List<ProductDto>>(result);
+            var list = JsonSerializer.Deserialize<List<LeaseDto>>(result);
             Console.WriteLine(result);
             return list;
         }
@@ -62,10 +62,10 @@ namespace Verleihsystem.Services
         {
             var result = CallApiPost($"{BASE_URL}{POST}customer.php", 
                 new Dictionary<string, string> { 
-                    { "id", customer.Id},
-                    { "name", customer.Name},
-                    { "email", customer.Email },
-                    { "tel", customer.Tel },
+                    { "id", customer.id},
+                    { "name", customer.name},
+                    { "email", customer.email },
+                    { "tel", customer.tel },
                 });
             return result;
         }
@@ -103,21 +103,14 @@ namespace Verleihsystem.Services
             return result;
         }
 
-        public string PostLeasedProduct(ProductDto product)
+        public string PostLeasedProduct(string productid, string customerid)
         {
             var result = CallApiLease($"{BASE_URL}{POST}ausgelieheneProdukte.php",
                 new Dictionary<string, string> {
-                    { "id", product.id},
-                    { "name", product.name},
-                    { "kategorie", product.kategorie},
-                    { "code", product.code },
+                    { "kunden_id", customerid },
+                    { "produkt_id", productid },
                 });
             return result;
-        }
-
-        public string LendProduct(int productId, int customerId)
-        {
-            return "not implemented";
         }
 
         public string CallApiGet(string url)
@@ -135,7 +128,7 @@ namespace Verleihsystem.Services
         public string CallApiLease(string url, IEnumerable<KeyValuePair<string, string>> content)
         {
             var body = new FormUrlEncodedContent(content);
-            return client.PostAsync(url, body).Result.Content.ToString();
+            return client.PostAsync(url, body).Result.StatusCode.ToString();
         }
     }
 }

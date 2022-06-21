@@ -19,6 +19,8 @@ namespace Verleihsystem.ViewModels
         private IServiceProvider serviceProvider;
         private DbService dbService;
 
+        private bool leased = false;
+
         public MainWindowViewModel(IServiceProvider serviceProvider)
         {
             this.serviceProvider = serviceProvider;
@@ -71,14 +73,14 @@ namespace Verleihsystem.ViewModels
         {
             UserControls = new();
             var dbservice = serviceProvider.GetService(typeof(DbService)) as DbService;
-            dbservice!.GetAllCustomers().ForEach(x =>
+            dbservice!.GetAllCustomers().ToList().ForEach(x =>
             {
                 var userControl = new CustomerUserControl
                 {
-                    CustomerId = x.Id,
-                    CustomerName = x.Name,
-                    CustomerEmail = x.Email,
-                    CustomerTel = x.Tel,
+                    CustomerId = x.id,
+                    CustomerName = x.name,
+                    CustomerEmail = x.email,
+                    CustomerTel = x.tel,
                 };
                 UserControls.Add(userControl);
             });
@@ -88,10 +90,11 @@ namespace Verleihsystem.ViewModels
         {
             UserControls = new();
             var dbservice = serviceProvider.GetService(typeof(DbService)) as DbService;
-            dbservice!.GetAllProducts().ForEach(x =>
+            dbservice!.GetAllProducts().ToList().ForEach(x =>
             {
                 var userControl = new ProductUserControl
                 {
+                    Id = x.id,
                     ProductName = x.name,
                     CategoryName = x.kategorie,
                     CustomerName = "empty",
@@ -101,8 +104,31 @@ namespace Verleihsystem.ViewModels
                     Counter = -1,
                 };
                 userControl.SelectedEvent += ProductUserControlSelected;
-                userControl.EditEvent += ProductUserControlEdit;
                 UserControls.Add(userControl);
+            });
+        }
+
+        private void FillWithLeasedProductUserControl()
+        {
+            UserControls = new();
+            var dbservice = serviceProvider.GetService(typeof(DbService)) as DbService;
+            dbservice.GetAllLeasedProducts().ForEach(y => 
+            {
+                dbservice!.GetAllProducts().Where(x => y.produkt_id == x.id).ToList().ForEach(x =>
+                {
+                    var userControl = new ProductUserControl
+                    {
+                        ProductName = x.name,
+                        CategoryName = x.kategorie,
+                        CustomerName = "empty",
+                        BarcodeTxt = -1,
+                        LendDate = DateTime.Now,
+                        ReturnDate = DateTime.Now.AddDays(2),
+                        Counter = -1,
+                    };
+                    userControl.SelectedEvent += ProductUserControlSelected;
+                    UserControls.Add(userControl);
+                });
             });
         }
 
@@ -113,6 +139,13 @@ namespace Verleihsystem.ViewModels
             set { userControls = value; 
                 NotifyPropertyChanged(nameof(UserControls));
             }
+        }
+
+        private UserControl selectedUserControl;
+        public UserControl SelectedUserControl
+        {
+            get { return selectedUserControl; }
+            set { selectedUserControl = value; }
         }
 
         public void ProductUserControlSelected(object sender, ProductUserControlSelectedEventArgs e)
@@ -132,6 +165,61 @@ namespace Verleihsystem.ViewModels
         {
             get { return homeRibbon; }
             set { homeRibbon = value;}
+        }
+
+        private RelayCommand<string> consoleCommand;
+        public ICommand ConsoleCommand
+        {
+            get
+            {
+                if (consoleCommand == null)
+                {
+                    consoleCommand = new RelayCommand<string>(_ => Console.WriteLine("Test"));
+                }
+                return consoleCommand;
+            }
+        }
+
+        private RelayCommand<string> lendProductCommand;
+        public ICommand LendProductCommand
+        {
+            get
+            {
+                if (lendProductCommand == null)
+                {
+                    lendProductCommand = new RelayCommand<string>(_ =>
+                    {
+                        var window = serviceProvider.GetService(typeof(BorrowProduct)) as Window;
+                        window.Show();
+                    });
+                }
+                return lendProductCommand;
+            }
+        }
+
+        private RelayCommand<string> showLentProductsCommand;
+        public ICommand ShowLentProductsCommand
+        {
+            get
+            {
+                if (showLentProductsCommand == null)
+                {
+                    showLentProductsCommand = new RelayCommand<string>(_ => 
+                    {
+                        if (!leased)
+                        {
+                            FillWithLeasedProductUserControl();
+                            leased = true;
+                        } 
+                        else
+                        {
+                            FillWithProductUserControls();
+                            leased = false;
+                        }
+                    });
+                }
+                return showLentProductsCommand;
+            }
         }
 
         #region

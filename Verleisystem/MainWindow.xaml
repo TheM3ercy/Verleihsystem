@@ -15,11 +15,13 @@
             </Grid.RowDefinitions>
             <Menu >
             <MenuItem Header="File" Click="File_OnClick"/>
-            <MenuItem Header="Home" Command="{Binding TestCommand, Mode=OneWay}"/>
+            <MenuItem Header="Home" Command="{Binding ConsoleCommand}"/>
             <MenuItem Header="Ansicht"/>
         </Menu>
         <StackPanel Grid.Row="1" Background="LightGray">
             <UserControls:HomeRibbon DataContext="{Binding HomeRibbon}"/>
+            <Button Content="Lend" Command="{Binding LendProductCommand}"/>
+            <Button Content="Show Lent Products" Command="{Binding ShowLentProductsCommand}"/>
         </StackPanel>
 
 
@@ -37,7 +39,7 @@
                 <UserControls:ProductUserControl />-->
             </ListBox>
         </StackPanel>
-        <ListView HorizontalAlignment="Left" Height="2406" Margin="0,10,0,0" Grid.Row="2" VerticalAlignment="Top" Width="1960" ItemsSource="{Binding UserControls}">
+        <ListView SelectedItem="{Binding SelectedUserControl}" HorizontalAlignment="Left" Height="2406" Margin="0,10,0,0" Grid.Row="2" VerticalAlignment="Top" Width="1960" ItemsSource="{Binding UserControls}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>

@@ -37,9 +37,7 @@ namespace Verleisystem
         //Used for API testing
         private void File_OnClick(object sender, RoutedEventArgs e)
         {
-            dbservice.GetAllProducts();
-            dbservice.PostProduct(new ProductDto { name = "testproduct", code = "123", kategorie = "1"});
-            dbservice.GetAllProducts();
+            dbservice.GetAllCustomers();
         }
     }
 }

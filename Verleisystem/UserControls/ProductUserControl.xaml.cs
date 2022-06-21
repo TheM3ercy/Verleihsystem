@@ -24,13 +24,11 @@ namespace Verleihsystem.UserControls
     public partial class ProductUserControl : UserControl
     {
         public event EventHandler<ProductUserControlSelectedEventArgs> SelectedEvent;
-        public event EventHandler<ProductUserControlSelectedEventArgs> EditEvent;
 
         public ProductUserControl()
         {
             InitializeComponent();
             stkBackground.MouseRightButtonDown += OnRightClickListener;
-            stkBackground.MouseLeftButtonDown += OnLeftClickListener;
         }
 
         public void OnRightClickListener(object sender, RoutedEventArgs e)
@@ -38,10 +36,7 @@ namespace Verleihsystem.UserControls
             SelectedEvent?.Invoke(sender, new ProductUserControlSelectedEventArgs { Name = ProductName});
         }
 
-        public void OnLeftClickListener(object sender, RoutedEventArgs e)
-        {
-            EditEvent?.Invoke(sender, new ProductUserControlSelectedEventArgs { Name = ProductName });
-        }
+        public string Id { get; set; }
 
         [Category("Data"), Description("Name of product")]
         public string ProductName

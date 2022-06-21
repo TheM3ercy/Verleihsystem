@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,18 +14,43 @@ namespace Verleihsystem.ViewModels
     public class BorrowProductViewModel : ObservableObject
     {
         private IServiceProvider serviceProvider;
+        private DbService dbService;
 
         public BorrowProductViewModel(IServiceProvider serviceProvider)
         {
             this.serviceProvider = serviceProvider;
+            dbService = serviceProvider.GetService(typeof(DbService)) as DbService;
+            FillProducts();
+            FillCustomers();
         }
 
-        private string productName;
-        public string ProductName
+        private void FillProducts()
         {
-            get { return productName; }
-            set { productName = value;
-                NotifyPropertyChanged(nameof(ProductName));
+            dbService.GetAllProducts().ToList().ForEach(x => Products.Add(x));
+        }
+
+        private void FillCustomers()
+        {
+            dbService.GetAllCustomers().ToList().ForEach(x => Customers.Add(x));
+        }
+
+        private ProductDto product;
+        public ProductDto Product
+        {
+            get { return product; }
+            set { product = value;
+                NotifyPropertyChanged(nameof(Product));
+            }
+        }
+
+        private ObservableCollection<ProductDto> products = new();
+        public ObservableCollection<ProductDto> Products
+        {
+            get { return products; }
+            set
+            {
+                products = value;
+                NotifyPropertyChanged(nameof(Products));
             }
         }
 
@@ -55,12 +81,23 @@ namespace Verleihsystem.ViewModels
             }
         }
 
-        private string customer;
-        public string Customer
+        private CustomerDto customer;
+        public CustomerDto Customer
         {
             get { return customer; }
             set { customer = value;
                 NotifyPropertyChanged(nameof(Customer));
+            }
+        }
+
+        private ObservableCollection<CustomerDto> customers = new();
+        public ObservableCollection<CustomerDto> Customers
+        {
+            get { return customers; }
+            set
+            {
+                customers = value;
+                NotifyPropertyChanged(nameof(Customers));
             }
         }
 
@@ -73,9 +110,31 @@ namespace Verleihsystem.ViewModels
             }
         }
 
-        public ICommand AbortCommand = new RelayCommand<Window>(x => x.Close());
-        public ICommand ConfirmCommand = new RelayCommand<string>(_ =>
+        private RelayCommand<Window> abortCommand;
+        public ICommand AbortCommand
         {
-        });
+            get
+            {
+                if (abortCommand == null)
+                {
+                    abortCommand = new RelayCommand<Window>(x => x.Close());
+                }
+                return abortCommand;
+            }
+        }
+
+        private RelayCommand<Window> confirmCommand;
+        public ICommand ConfirmCommand
+        {
+            get
+            {
+                if (confirmCommand == null)
+                {
+                    confirmCommand = new RelayCommand<Window>(x => Console.WriteLine(dbService.PostLeasedProduct(Product.id, Customer.id)), 
+                        _ => Product != null && Customer != null);
+                }
+                return confirmCommand;
+            }
+        }
     }
 }
