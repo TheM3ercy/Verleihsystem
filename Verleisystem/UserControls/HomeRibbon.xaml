@@ -8,10 +8,10 @@
              d:DesignHeight="100" d:DesignWidth="800">
     <Grid>
             <StackPanel Orientation="Horizontal">
-            <Button Width="100" Margin="10">Neu</Button>
-            <Button Width="100" Margin="10">Filter</Button>
-                <Button Width="100" Margin="10">Refresh</Button>
-            <Button Width="100" Margin="10">Erweiterte Suche
+            <Button Width="100" Margin="10" Click="New_Click">Neu</Button>
+            <Button Width="100" Margin="10" Click="Filter_Click">Filter</Button>
+                <Button Width="100" Margin="10" Click="Refresh_Click">Refresh</Button>
+            <Button Width="100" Margin="10" Click="Search_Click">Erweiterte Suche
             </Button>
         </StackPanel>
     </Grid>

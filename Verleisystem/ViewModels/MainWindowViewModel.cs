@@ -25,6 +25,8 @@ namespace Verleihsystem.ViewModels
             if (serviceProvider.GetService(typeof(DbService)) == null) throw new ArgumentNullException();
             dbService = serviceProvider.GetService(typeof(DbService)) as DbService;
             if (dbService == null) throw new ArgumentNullException();
+            var homeribbon = new HomeRibbon();
+            HomeRibbon = homeribbon;
             FillWithProductUserControls();
         }
 
@@ -124,6 +126,14 @@ namespace Verleihsystem.ViewModels
             var window = serviceProvider.GetService(typeof(BorrowProduct)) as Window;
             window.Show();
         }
+
+        private HomeRibbon homeRibbon;
+        public HomeRibbon HomeRibbon
+        {
+            get { return homeRibbon; }
+            set { homeRibbon = value;}
+        }
+
         #region
         //public ICommand OpenBorrowProductMenu = new RelayCommand<string>(_ =>
         //{

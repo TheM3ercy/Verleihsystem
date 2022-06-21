@@ -5,19 +5,26 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using Verleihsystem.Dtos;
 using Verleihsystem.Services;
 
 namespace Verleihsystem.ViewModels
 {
     public class BorrowProductViewModel : ObservableObject
     {
+        private IServiceProvider serviceProvider;
+
+        public BorrowProductViewModel(IServiceProvider serviceProvider)
+        {
+            this.serviceProvider = serviceProvider;
+        }
+
         private string productName;
         public string ProductName
         {
             get { return productName; }
             set { productName = value;
                 NotifyPropertyChanged(nameof(ProductName));
-                ConfirmCommand.Execute(productName);
             }
         }
 
@@ -69,15 +76,6 @@ namespace Verleihsystem.ViewModels
         public ICommand AbortCommand = new RelayCommand<Window>(x => x.Close());
         public ICommand ConfirmCommand = new RelayCommand<string>(_ =>
         {
-            throw new NotImplementedException();
-            if (false/*Database contains name*/)
-            {
-                /*Edit Database entry*/
-            }
-            else
-            {
-                /*Create new Database entry*/
-            }
         });
     }
 }

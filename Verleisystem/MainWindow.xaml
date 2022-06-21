@@ -19,7 +19,7 @@
             <MenuItem Header="Ansicht"/>
         </Menu>
         <StackPanel Grid.Row="1" Background="LightGray">
-            <UserControls:HomeRibbon Height="*"/>
+            <UserControls:HomeRibbon DataContext="{Binding HomeRibbon}"/>
         </StackPanel>
 
 
