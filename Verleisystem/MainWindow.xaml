@@ -16,7 +16,12 @@
             <Menu >
             <MenuItem Header="File" Click="File_OnClick"/>
             <MenuItem Header="Home" Command="{Binding ConsoleCommand}"/>
-            <MenuItem Header="Ansicht"/>
+            <MenuItem Header="Ansicht">
+                <MenuItem Header="Produkte" Command="{Binding ShowProductsCommand}"/>
+                <MenuItem Header="Customer" Command="{Binding ShowCustomersCommand}"/>
+                <MenuItem Header="Category" Command="{Binding ShowCategoriesCommand}"/>
+                <MenuItem Header="Lendet Produkte" Command="{Binding ShowLentProductsCommand}"/>
+            </MenuItem>
         </Menu>
         <StackPanel Grid.Row="1" Background="LightGray">
             <UserControls:HomeRibbon DataContext="{Binding HomeRibbon}"/>

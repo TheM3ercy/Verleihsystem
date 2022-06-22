@@ -222,6 +222,56 @@ namespace Verleihsystem.ViewModels
             }
         }
 
+        private RelayCommand<string> showCategoriesCommand;
+        public ICommand ShowCategoriesCommand
+        {
+            get
+            {
+                if (showCategoriesCommand == null)
+                {
+                    showCategoriesCommand = new RelayCommand<string>(_ =>
+                    {
+                        FillWithCategoryUserControls();
+                        leased = false;
+                    });
+                }
+                return showCategoriesCommand;
+            }
+        }
+
+        private RelayCommand<string> showCustomersCommand;
+        public ICommand ShowCustomersCommand
+        {
+            get
+            {
+                if (showCustomersCommand == null)
+                {
+                    showCustomersCommand = new RelayCommand<string>(_ =>
+                    {
+                        FillWithCustomerUserControls();
+                        leased = false;
+                    });
+                }
+                return showCustomersCommand;
+            }
+        }
+
+        private RelayCommand<string> showProductsCommand;
+        public ICommand ShowProductsCommand
+        {
+            get
+            {
+                if (showProductsCommand == null)
+                {
+                    showProductsCommand = new RelayCommand<string>(_ =>
+                    {
+                        FillWithProductUserControls();
+                        leased = false;
+                    });
+                }
+                return showProductsCommand;
+            }
+        }
         #region
         //public ICommand OpenBorrowProductMenu = new RelayCommand<string>(_ =>
         //{
