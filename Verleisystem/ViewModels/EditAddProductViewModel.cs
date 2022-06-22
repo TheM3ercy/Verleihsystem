@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,19 @@ namespace Verleihsystem.ViewModels
 {
     public class EditAddProductViewModel : ObservableObject
     {
+        private DbService dbService;
+
+        public EditAddProductViewModel(DbService dbservice)
+        {
+            this.dbService = dbservice;
+            FillCategories();
+        }
+
+        public void FillCategories()
+        {
+            dbService.GetAllCategories().ForEach(c => Categories.Add(c));
+        }
+
         private string productName;
         public string ProductName
         {
@@ -31,8 +45,8 @@ namespace Verleihsystem.ViewModels
             }
         }
 
-        private List<CategoryDto> categories;
-        public List<CategoryDto> Categories
+        private ObservableCollection<CategoryDto> categories = new();
+        public ObservableCollection<CategoryDto> Categories
         {
             get { return categories; }
             set { categories = value;
@@ -40,26 +54,36 @@ namespace Verleihsystem.ViewModels
             }
         }
 
-        private List<CategoryDto> selectedCategories;
-        public List<CategoryDto> SelectedCategories
+        private CategoryDto selectedCategory;
+        public CategoryDto SelectedCategory
         {
-            get { return selectedCategories; }
-            set { selectedCategories = value;
-                NotifyPropertyChanged(nameof(SelectedCategories));
+            get { return selectedCategory; }
+            set { selectedCategory = value;
+                NotifyPropertyChanged(nameof(SelectedCategory));
             }
         }
 
         public ICommand AbortCommand = new RelayCommand<Window>(x => x.Close());
-        public ICommand ConfirmCommand = new RelayCommand<string>(_ =>
+
+        private RelayCommand<string> createProductCommand;
+        public ICommand CreateProductCommand
         {
-            if (false/*Database contains name*/)
+            get
             {
-                /*Edit Database entry*/
+                if (createProductCommand == null)
+                {
+                    createProductCommand = new RelayCommand<string>(_ =>
+                    {
+                        dbService.PostProduct(new ProductDto
+                        {
+                            name = ProductName,
+                            code = Code,
+                            kategorie = SelectedCategory.id,
+                        });
+                    });
+                }
+                return createProductCommand;
             }
-            else
-            {
-                /*Create new Database entry*/
-            }
-        });
+        }
     }
 }

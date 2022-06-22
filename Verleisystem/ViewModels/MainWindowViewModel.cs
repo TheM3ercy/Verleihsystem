@@ -27,9 +27,17 @@ namespace Verleihsystem.ViewModels
             if (serviceProvider.GetService(typeof(DbService)) == null) throw new ArgumentNullException();
             dbService = serviceProvider.GetService(typeof(DbService)) as DbService;
             if (dbService == null) throw new ArgumentNullException();
+            HomeRibbon.NewEvent += NewSelected;
             var homeribbon = new HomeRibbon();
             HomeRibbon = homeribbon;
+            
             FillWithProductUserControls();
+        }
+
+        public void NewSelected(object sender, ViewRibbonSelectedEventArgs e)
+        {
+            var window = serviceProvider.GetService(typeof(EditAddProduct)) as Window;
+            window.Show();
         }
 
         public void Selected(object sender, ViewRibbonSelectedEventArgs e)
@@ -148,6 +156,14 @@ namespace Verleihsystem.ViewModels
             set { selectedUserControl = value; }
         }
 
+        private string viewLabel = "Produkte";
+        public string ViewLabel
+        {
+            get { return viewLabel; }
+            set { viewLabel = value; }
+        }
+
+
         public void ProductUserControlSelected(object sender, ProductUserControlSelectedEventArgs e)
         {
             var window = serviceProvider.GetService(typeof(EditAddProduct)) as Window;
@@ -210,11 +226,13 @@ namespace Verleihsystem.ViewModels
                         {
                             FillWithLeasedProductUserControl();
                             leased = true;
+                            ViewLabel = "Ausgeliehene Produkte";
                         } 
                         else
                         {
                             FillWithProductUserControls();
                             leased = false;
+                            ViewLabel = "Produkte";
                         }
                     });
                 }

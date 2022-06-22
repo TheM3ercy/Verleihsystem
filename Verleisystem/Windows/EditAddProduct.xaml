@@ -16,7 +16,7 @@
         <Label Content="Kategorie" Margin="34,203,308,102"/>
         <ComboBox HorizontalAlignment="Left" Margin="34,237,0,0" Text="" VerticalAlignment="Top" Width="311" Background="#FFA49E9E" ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory}"/>
         <Button Content="Abbrechen" HorizontalAlignment="Left" Margin="34,288,0,0" VerticalAlignment="Top" Command="{Binding AbortCommand}"/>
-        <Button Content="Übernehmen" HorizontalAlignment="Left" Margin="272,288,0,0" VerticalAlignment="Top" Command="{Binding ConfirmCommand}"/>
+        <Button Command="{Binding CreateProductCommand}" Content="Übernehmen" HorizontalAlignment="Left" Margin="272,288,0,0" VerticalAlignment="Top"/>
         
     </Grid>
 </Window>
